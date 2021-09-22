@@ -2,17 +2,20 @@
     background-color: white;
     overflow-x: hidden;
     margin-left: 5%;
-    margin-top: 1.5%;
+    margin: 5%;
     align-items: center;
     align-content: center;
-    margin-left: 450px;
 }
 
-.list-body {
-    background-color: white;
-    overflow-x: hidden;
-    margin-left: 5%;
-    margin-top: 1.5%;
+.main-footer {
+    color: #FFFFFF;
+    background-color: black;
+    padding: 1%;
+    position: fixed;
+    height: 17%;
+    bottom: 0%;
+    width: 100%;
+    box-shadow: 0px -19px 48px 10px rgba(0,0,0,0.34)
 }
 
 .title {
@@ -44,16 +47,6 @@
     color: white;
 }
 
-.main-footer {
-    color: #FFFFFF;
-    background-color: black;
-    padding-top: 3em;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 2em;
-    box-shadow: 0px -19px 48px 10px rgba(0,0,0,0.34)
-}
 
 .aboutUsText {
     text-decoration: none;
@@ -93,4 +86,10 @@
 
 .boldText {
     font-weight: bold;
+}
+
+.coverImage {
+    
+    width: 130px;
+    
 }
