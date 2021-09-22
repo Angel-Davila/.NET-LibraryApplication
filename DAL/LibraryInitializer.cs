@@ -47,8 +47,8 @@ namespace Library.DAL
                         Address = "328-3490 Ornare. Rd.",
                         PhoneNumber = "(369) 544-6189",
                         PostalCode = "70925"}
-
             };
+
             users.ForEach(s => context.Users.Add(s));
             context.SaveChanges();
 
