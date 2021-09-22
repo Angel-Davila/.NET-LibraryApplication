@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Library.Models
 {
@@ -11,14 +9,33 @@ namespace Library.Models
                 
         public int UserID { get; set; }
 
+
         public int BookID { get; set; }
 
-        public DateTime LoanDate { get; set; }
+        [DataType(DataType.DateTime)]
+        private DateTime? date;
+        
+        [Display(Name = "Loan date")]
+        public DateTime LoanDate 
+        {   
+            get { return date ?? DateTime.Now; } 
+            set { date = value; } 
+        }
 
+        [Display(Name = "Return date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReturnDate { get; set; }
 
         public virtual User User { get; set; }
 
         public virtual Book Book { get; set; }
+
+        public Loan()
+        {
+            LoanDate = DateTime.Now;
+        }
+        
     }
+        
 }
