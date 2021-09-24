@@ -50,7 +50,7 @@ namespace Library.Controllers
                 users = users.Where(x => x.LastName.Contains(searchString) || x.FirstName.Contains(searchString));
             }
 
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(users.ToPagedList(pageNumber, pageSize));
         }
