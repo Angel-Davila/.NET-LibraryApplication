@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Library.Models.Loan>
+<link rel="stylesheet" href="~/Styles/Form.css" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -26,26 +27,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoanDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReturnDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LoanID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LoanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LoanID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+            </td>
+        </tr>
+    }
 
 </table>

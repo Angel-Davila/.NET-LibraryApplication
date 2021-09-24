@@ -1,61 +1,49 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/Styles/Form.css" type="text/css" />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Library website</title>
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Library Database", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Index", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Loans", "Index", "Loan")</li>
-                    <li>@Html.ActionLink("Users", "Index", "User")</li>
-                    <li>@Html.ActionLink("Books", "Index", "Books")</li>
-                    <li>@Html.ActionLink("About us", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+<body class="text-center">
+    <div class="cover-container d-flex flex-column" style="padding-top: 15px">
 
-
-                </ul>
+        <header class="masthead mb-5">
+            <div class="inner">
+                <h3 class="masthead-brand">Library Database </h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    
+                    <a class="nav-link" href="/">Index</a>
+                    <a class="nav-link" href="/User">Users</a>
+                    <a class="nav-link" href="/Loan">Loans</a>
+                    <a class="nav-link" href="/Book">Books</a>
+                    <a class="nav-link" href="/Home/About">About</a>
+                    <a class="nav-link" href="/Home/Contact">Contact</a>
+                </nav>
             </div>
-        </div>
+
+        </header>
+
+        <main role="main" class="inner cover">
+            @RenderBody()
+        </main>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-    </div>
+
     <footer class="main-footer">
-        <div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div>
-                            <img class="logo" src="http:///drive.google.com/uc?export=view&id=1z2KznsJ73TwH-Q2jRBs6zv1fTXZCI2bC"/>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <h4 class="col-sm">
-                        Library website < <a target="_blank" class="linkedText" href="https://github.com/Angel-Davila">Angel Davila</a>  @DateTime.Now.Year >
-                    </h4>
-                </div>
+    <hr />
+        <div class="inner">
+            <div>
+                <img class="logo" src="http:///drive.google.com/uc?export=view&id=1z2KznsJ73TwH-Q2jRBs6zv1fTXZCI2bC" />
             </div>
+            <p class="col-sm">
+                Library website < <a target="_blank" class="linkedText" href="https://github.com/Angel-Davila">Angel Davila</a>  @DateTime.Now.Year >
+            </p>
         </div>
     </footer>
 

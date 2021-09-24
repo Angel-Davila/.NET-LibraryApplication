@@ -1,8 +1,12 @@
 ﻿@model Library.Models.User
 
+<link rel="stylesheet" href="~/Styles/Form.css" type="text/css" />
+
 @{
     ViewBag.Title = "Delete";
 }
+
+<link rel="stylesheet" href="~/Styles/Form.css" type="text/css" />
 
 <h2>Delete</h2>
 
@@ -61,7 +65,9 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

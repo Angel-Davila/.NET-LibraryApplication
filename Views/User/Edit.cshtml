@@ -1,4 +1,5 @@
 ﻿@model Library.Models.User
+<link rel="stylesheet" href="~/Styles/Form.css" type="text/css" />
 
 @{
     ViewBag.Title = "Edit";
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
