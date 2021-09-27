@@ -6,7 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Library.DAL;
+using PagedList;
+using Library.DAL; 
 using Library.Models;
 
 namespace Library.Controllers
@@ -16,10 +17,49 @@ namespace Library.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Loan
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var loans = db.Loans.Include(l => l.Book).Include(l => l.User);
-            return View(loans.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "title_descent" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_descendent" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var loans = from s in db.Loans
+                           select s;
+
+            switch (sortOrder)
+            {
+                case "name_descendent":
+                    loans = loans.OrderByDescending(x => x.Book.Title);
+                    break;
+                case "Date":
+                    loans = loans.OrderBy(x => x.LoanDate);
+                    break;
+                case "date_descendent":
+                    loans = loans.OrderByDescending(x => x.LoanDate);
+                    break;
+                default:
+                    loans = loans.OrderBy(x => x.Book.Title);
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                loans = loans.Where(x => x.Book.Title.Contains(searchString));
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(loans.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Loan/Details/5

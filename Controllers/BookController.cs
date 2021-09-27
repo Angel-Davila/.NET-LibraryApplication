@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Library.DAL;
 using Library.Models;
+using PagedList;
 
 namespace Library.Controllers
 {
@@ -16,9 +17,40 @@ namespace Library.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Book
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Books.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "title_descent" : "";
+
+            if (searchString != null) 
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var books = from s in db.Books
+                        select s;
+            switch (sortOrder)
+            {
+                case "title_descent":
+                    books = books.OrderByDescending(x => x.Title);
+                    break;
+                default:
+                    books = books.OrderBy(x => x.Title);
+                    break;
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(x => x.Title.Contains(searchString));
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Book/Details/5
