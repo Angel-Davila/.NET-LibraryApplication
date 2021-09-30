@@ -5,7 +5,7 @@
 }
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+    <div class="carousel-inner" id="carouselHub">
         <div class="carousel-item active" data-bs-interval="10000">
             <img src="http:///drive.google.com/uc?export=view&id=1th-pQ0rdn8E7qBChpKK49TnGajCzzrf1" class="carouselImage" alt="...">
         </div>
@@ -26,26 +26,6 @@
     </button>
 </div>
 
-<script>
-    $(document).ready(function () {
-
-        // Activate Carousel
-        $("#carouselExampleInterval").carousel({
-            interval: 1000
-        });
-
-        // Enable Carousel Controls
-        $(".left").click(function () {
-            $("#carouselExampleInterval").carousel("prev")
-        });
-
-        $(".right").click(function () {
-            $("#carouselExampleInterval").carousel("next")
-        });
-    });
-
-</script>
-
 <br />
 <div class="jumbotron">
     <h1>ASP.NET library database</h1>
@@ -58,8 +38,7 @@
         <h2>Getting started</h2>
         <p>
             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            enables a clean separation of concerns.
         </p>
         <p><a class="btn btn-default" style="color: ghostwhite" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
