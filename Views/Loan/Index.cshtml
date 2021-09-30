@@ -9,64 +9,78 @@
 
 <h2>All loans</h2>
 
-@using (Html.BeginForm("Index", "Loan", FormMethod.Get))
-{
-    <br />
-    <p class="searchBox">
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" class="button"/>
-    </p>
-}
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            @using (Html.BeginForm("Index", "Loan", FormMethod.Get))
+            {
+                <p class="searchBox">
+                    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <input type="submit" value="Search" class="button" />
+                </p>
+            }
+        </div>
+        <div class="col-2">
+            <p>
+                @Html.ActionLink("Record new loan", "Create")
+            </p>
+        </div>
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
 
-        </th>
-        <th>
-            User
-        </th>
-        <th>
-            @Html.ActionLink("Loan date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Return Date
-        </th>
-        <th></th>
-    </tr>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table">
+                <tr class="align-middle">
+                    <th>
+                        @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoanDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
-            </td>
-        </tr>
-    }
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        @Html.ActionLink("Loan date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        Return Date
+                    </th>
+                    <th></th>
+                </tr>
 
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoanDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReturnDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+                        </td>
+                    </tr>
+                }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<div class="numberPage" id="numberPage">
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            </table>
+        </div>
+    </div>
 </div>
 
+<div class="numberPage" id="numberPage">
+    <p class="text-center">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </p>
+    <p class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </p>
+</div>
