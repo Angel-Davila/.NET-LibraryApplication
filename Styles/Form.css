@@ -31,26 +31,18 @@ a:hover {
     border: .05rem solid #fff;
 }
 
-
-/*
- * Base structure
- */
-
 html,
 body {
-    height: 100%;
     background-color: #333;
 }
 
 body {
-   
     display: -ms-flexbox;
     display: -webkit-box;
     display: flex;
     -ms-flex-pack: center;
     -webkit-box-pack: center;
     justify-content: center;
-    color: white;
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
@@ -58,22 +50,13 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     color: white;
 }
 
-.cover-container {
-    max-width: 97%;
-    max-height: 95%;
-}
-
-
-/*
- * Header
- */
 .masthead {
     margin-top: 10px
 }
 
 .masthead-brand {
     
-    padding-right: 650px;
+    padding-right: 15%;
     
 }
 
@@ -109,10 +92,6 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     }
 }
 
-
-/*
- * Cover
- */
 .cover {
 }
 
@@ -121,21 +100,15 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
         font-weight: 700;
     }
 
-
-/*
- * Footer
- */
 .mastfoot {
     color: rgba(255, 255, 255, .5);
 }
 
-
-
 .main-footer {
     color: rgba(255, 255, 255, .5);
     padding: 1%;
-    bottom: 2%;
-    position: fixed;
+    bottom: 0%;
+    position: static;
     height: 12%;
     width: 100%;
     
@@ -150,7 +123,6 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
 
 .button {
     align-self: center;
-    display: inline-block;
     border: 0.1em solid #000000;
     border-radius: 0.12em;
     box-sizing: border-box;
@@ -158,7 +130,9 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     font-weight: 300;
     color: black;
     text-align: center;
-    transition: all 0.2s;
+    transition: all 1s;
+    width: 100px;
+    height: 35px;
     border-radius: 5%;
 }
 
@@ -213,25 +187,48 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     width: 130px;        
 }
 
-#input{
-    align-self: center;
-    margin-left: 37%;
-}
 
 .tableSection {
 }
 
 .searchBox{
-    margin-right: 70%;
 }
 
 .carouselImage{
     width: 50%;
     height: 50%;
-    
+    margin-left: 25%
 }
-
 
 .numberPage > p {
     font-weight: bold;
 }
+
+#inputForm {
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+   
+}
+
+#formCenter {
+
+    align-items: center
+}
+
+.form-group{
+    margin-bottom: 1%;
+}
+
+.form-control:focus {
+    border: 3px rgba(255, 255, 255, .5);
+    border-block-color: dimgrey;
+    background-color: lightgray
+}
+
+.containerButton {
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}
+
