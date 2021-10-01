@@ -1,53 +1,48 @@
 ﻿
 body {
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: flex;
-    -ms-flex-pack: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    color: #fff;
+    
+    color: #fff !important;
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  
 }
-/*
- * Globals
- */
 
-/* Links */
 a,
 a:focus,
 a:hover {
     color: #fff;
 }
 
-/* Custom default button */
+
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
     color: #333;
-    text-shadow: none; /* Prevent inheritance from `body` */
+    text-shadow: none; 
     background-color: #fff;
     border: .05rem solid #fff;
 }
 
 html,
 body {
-    background-color: #333;
+    background-color: #333 !important;
+    margin: 0;
+    height: 100%;
+
 }
 
 body {
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: flex;
-    -ms-flex-pack: center;
-    -webkit-box-pack: center;
-    justify-content: center;
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
-body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
-    color: white;
+body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
+    color: white !important;
+}
+.dxpLite{
+    color: white !important;
+}
+.dxpLite .dxp-current {
+    color: white !important;
 }
 
 .masthead {
@@ -106,10 +101,8 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
 
 .main-footer {
     color: rgba(255, 255, 255, .5);
-    padding: 1%;
-    bottom: 0%;
-    position: static;
-    height: 12%;
+    bottom: 0;
+    position: relative;
     width: 100%;
     
 }
@@ -232,3 +225,13 @@ body > p, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     align-items: center
 }
 
+
+.dxgv {
+    background-color: #333;
+    color: black;
+}
+
+.dxgvGroupPanel{
+    background-color: transparent;
+    color: white;
+}
