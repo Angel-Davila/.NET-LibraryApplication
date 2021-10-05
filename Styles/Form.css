@@ -1,10 +1,14 @@
-﻿
+﻿html,
 body {
-    
+    background-color: #333 !important;
+    min-height: 100%;
+    width: 100%;
+}
+
+body {
     color: #fff !important;
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-  
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); 
 }
 
 a,
@@ -12,7 +16,6 @@ a:focus,
 a:hover {
     color: #fff;
 }
-
 
 .btn-secondary,
 .btn-secondary:hover,
@@ -23,19 +26,11 @@ a:hover {
     border: .05rem solid #fff;
 }
 
-html,
-body {
-    background-color: #333 !important;
-    margin: 0;
-    height: 100%;
-
-}
-
 body {
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
-body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
+body > p, b, a, h3, h4, h5,  dt, dd, dl, p > a{
     color: white !important;
 }
 .dxpLite{
@@ -50,9 +45,7 @@ body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
 }
 
 .masthead-brand {
-    
     padding-right: 15%;
-    
 }
 
 .nav-masthead .nav-link {
@@ -89,7 +82,6 @@ body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
 
 .cover {
 }
-
     .cover .btn-lg {
         padding: .75rem 1.25rem;
         font-weight: 700;
@@ -104,7 +96,6 @@ body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     bottom: 0;
     position: relative;
     width: 100%;
-    
 }
 
 .title {
@@ -180,13 +171,6 @@ body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     width: 130px;        
 }
 
-
-.tableSection {
-}
-
-.searchBox{
-}
-
 .carouselImage{
     width: 50%;
     height: 50%;
@@ -225,13 +209,52 @@ body > p, b, a, h3, h4, h5, td, table, th, tr, dt, dd, dl, p > a{
     align-items: center
 }
 
-
 .dxgv {
     background-color: #333;
-    color: black;
+    color: white;
+    text-align: center;
 }
 
 .dxgvGroupPanel{
     background-color: transparent;
     color: white;
+}
+
+.dxeListBoxItem {
+    color: black !important;
+}
+
+.dxgvHeader > td {
+    color: black !important;
+}
+
+#LoansGridView_DXHeadersRow0 {
+    color: white;
+}
+
+.dxeListBoxItemRow {
+    color: black !important;
+}
+
+.dxflCaption{
+    color: white;
+}
+
+.dxflRequired{
+    color: white;
+}
+
+.dxeImage {
+    height: 127.99px !important;
+    width: 68.99px !important;
+    margin-left: 35%;
+    margin-bottom: 4%;
+}
+
+.dxgvGroupRow, .dxgvBatchEditchangesPreviewGroupRow{
+    background-color: #333 !important;
+}
+
+dxgvIndentCell, .dxgv {
+    background-color: #333 !important;
 }
