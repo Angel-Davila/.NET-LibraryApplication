@@ -1,0 +1,110 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "LoansGridView";
+        settings.CallbackRouteValues = new { Controller = "Loan", Action = "LoansGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Loan", Action = "LoansGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Loan", Action = "LoansGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Loan", Action = "LoansGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.NewButton.Image.IconID = IconID.OutlookinspiredAddfileSvgDark32x32;
+
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.SettingsCommandButton.DeleteButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.DeleteButton.Image.IconID = IconID.SnapSnapdeletelistSvgWhite16x16;
+
+        settings.CommandColumn.ShowEditButton = true;
+        settings.SettingsCommandButton.EditButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.EditButton.Image.IconID = IconID.OutlookinspiredHighlightSvgWhite16x16;
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 50;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Left;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.KeyFieldName = "LoanID";
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "BookID";
+            column.Caption = "Book title";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewData["Books"];
+            comboBoxProperties.ValueField = "BookID";
+            comboBoxProperties.TextField = "Title";
+            comboBoxProperties.ValueType = typeof(int);
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "UserID";
+            column.Caption = "User";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = ViewData["Users"];
+            comboBoxProperties.ValueField = "UserID";
+            comboBoxProperties.TextField = "Name";
+            comboBoxProperties.ValueType = typeof(string);
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LoanDate";
+            column.Caption = "Loan Date";
+
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.PropertiesEdit.DisplayFormatString = "yyyy-MM-dd";
+            column.EditorProperties().DateEdit(p =>
+            {
+                p.AllowUserInput = false;
+                p.TimeSectionProperties.Visible = true;
+                p.EditFormatString = "yyyy-MM-dd";
+                p.DisplayFormatString = "yyyy-MM-dd";
+                p.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+            });
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ReturnDate";
+            column.Caption = "Return Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.PropertiesEdit.DisplayFormatString = "yyyy-MM-dd";
+            column.EditorProperties().DateEdit(p =>
+
+            {
+                p.AllowUserInput = true;
+                p.TimeSectionProperties.Visible = true;
+                //p.TimeSectionProperties.Adaptive = true;
+                p.EditFormatString = "yyyy-MM-dd";
+                p.DisplayFormatString = "yyyy-MM-dd";
+                p.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+            });
+        });
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

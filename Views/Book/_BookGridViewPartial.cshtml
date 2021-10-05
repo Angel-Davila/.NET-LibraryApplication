@@ -1,0 +1,80 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+
+        settings.Name = "BookGridView";
+        settings.CallbackRouteValues = new { Controller = "Book", Action = "BookGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Book", Action = "BookGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Book", Action = "BookGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Book", Action = "BookGridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.NewButton.Image.IconID = IconID.OutlookinspiredAddfileSvgDark32x32;
+
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.SettingsCommandButton.DeleteButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.DeleteButton.Image.IconID = IconID.SnapSnapdeletelistSvgWhite16x16;
+
+        settings.CommandColumn.ShowEditButton = true;
+        settings.SettingsCommandButton.EditButton.RenderMode = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.EditButton.Image.IconID = IconID.OutlookinspiredHighlightSvgWhite16x16;
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 10;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.KeyFieldName = "BookID";
+
+        settings.Columns.Add(new GridViewDataImageColumn
+        {
+            UnboundType = DevExpress.Data.UnboundColumnType.Object,
+            FieldName = "ImgCover",
+            Caption = "Book Cover",
+
+        });
+
+
+        settings.CustomUnboundColumnData = (sender, e) =>
+        {
+            if (e.Column.FieldName == "ImgCover")
+            {
+                var gridImg = sender as MVCxGridView;
+                string sRef = (string)gridImg.GetRowValues(e.ListSourceRowIndex, "Ref");
+                e.Value = string.Format("http://i.xxxxx.com/{0}_I.jpg", sRef);
+            }
+        };
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ImgCover";
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+
+        settings.Columns.Add("Title");
+        settings.Columns.Add("Author");
+        settings.Columns.Add("Date");
+        settings.Columns.Add("Genre");
+        settings.Columns.Add("Price");
+        settings.Columns.Add("PageNumber");
+
+    });
+
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
