@@ -20,6 +20,8 @@ namespace Library
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DbInterception.Add(new LibraryInterceptorTransientErrors());
             DbInterception.Add(new LibraryInterceptorLogging());
+            ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
+
         }
     }
 }
