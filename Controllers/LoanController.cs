@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using Library.DAL; 
+using Library.DAL;
 using Library.Models;
 
 namespace Library.Controllers
@@ -34,7 +35,7 @@ namespace Library.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var loans = from s in db.Loans
-                           select s;
+                        select s;
 
             switch (sortOrder)
             {
@@ -80,8 +81,9 @@ namespace Library.Controllers
         // GET: Loan/Create
         public ActionResult Create()
         {
+
             ViewBag.BookID = new SelectList(db.Books, "BookID", "Title");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName");
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
             return View();
         }
 
@@ -100,7 +102,7 @@ namespace Library.Controllers
             }
 
             ViewBag.BookID = new SelectList(db.Books, "BookID", "Title", loan.BookID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", loan.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loan.UserID);
             return View(loan);
         }
 
@@ -117,7 +119,7 @@ namespace Library.Controllers
                 return HttpNotFound();
             }
             ViewBag.BookID = new SelectList(db.Books, "BookID", "Title", loan.BookID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", loan.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loan.UserID);
             return View(loan);
         }
 
@@ -126,7 +128,7 @@ namespace Library.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LoanID,UserID,BookID,LoanDate,ReturnDate")] Loan loan)
+        public ActionResult Edit([Bind(Include = "LoanID, UserID, BookID, LoanDate, ReturnDate")] Loan loan)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +137,7 @@ namespace Library.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.BookID = new SelectList(db.Books, "BookID", "Title", loan.BookID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", loan.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loan.UserID);
             return View(loan);
         }
 
@@ -173,5 +175,91 @@ namespace Library.Controllers
             }
             base.Dispose(disposing);
         }
+
+        LibraryContext db1 = new LibraryContext();
+
+
+        [ValidateInput(false)]
+        public ActionResult LoansGridViewPartial()
+        {
+            var model = db1.Loans;
+            ViewData["Books"] = db1.Books.Select(x => new { x.BookID, x.Title }).ToList();
+            ViewData["Users"] = db1.Users.Select(x => new { x.UserID, x.Name  }).ToList();
+
+            return PartialView("_LoansGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+
+        public ActionResult LoansGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Library.Models.Loan item)
+        {
+            var model = db1.Loans;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_LoansGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult LoansGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Library.Models.Loan item)
+        {
+            var model = db1.Loans;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.LoanID == item.LoanID);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db1.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_LoansGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult LoansGridViewPartialDelete(int? LoanID)
+        {
+            var model = db1.Loans;
+            if (LoanID >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.LoanID == LoanID);
+                    if (item != null)
+                        db1.Loans.Remove(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_LoansGridViewPartial", model.ToList());
+        }
+
+        public ActionResult ComboBox1Partial()
+        {
+            return PartialView("_ComboBox1Partial");
+        }   
     }
 }

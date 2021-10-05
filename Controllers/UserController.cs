@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -39,15 +40,15 @@ namespace Library.Controllers
             switch (sortOrder)
             {
                 case "name_descendent":
-                    users = users.OrderByDescending(x => x.FirstName);
+                    users = users.OrderByDescending(x => x.Name);
                     break;
                 default:
-                    users = users.OrderBy(x => x.FirstName);
+                    users = users.OrderBy(x => x.Name);
                     break;
             }
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
-                users = users.Where(x => x.LastName.Contains(searchString) || x.FirstName.Contains(searchString));
+                users = users.Where(x => x.Name.Contains(searchString));
             }
 
             int pageSize = 10;
@@ -81,7 +82,7 @@ namespace Library.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName, LastName, Email, Address, PhoneNumber, PostalCode")] User user)
+        public ActionResult Create([Bind(Include = "Name, Email, Address, PhoneNumber, PostalCode")] User user)
         {
             try
             {
@@ -91,7 +92,8 @@ namespace Library.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }catch(RetryLimitExceededException)
+            }
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to create user");
             }
@@ -126,14 +128,14 @@ namespace Library.Controllers
             }
             var userToUpdate = db.Users.Find(id);
             if (TryUpdateModel(userToUpdate, "",
-                new string[] { "FirstName", "LastName", "Email", "Address", "PhoneNumber", "PostalCode" }))
+                new string[] { "Name", "Email", "Address", "PhoneNumber", "PostalCode" }))
             {
                 try
                 {
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch(RetryLimitExceededException)
+                catch (RetryLimitExceededException)
                 {
                     ModelState.AddModelError("", "Unable to save changes");
                 }
@@ -185,6 +187,80 @@ namespace Library.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        Library.DAL.LibraryContext db1 = new Library.DAL.LibraryContext();
+
+        [ValidateInput(false)]
+        public ActionResult UserGridViewPartial()
+        {
+            var model = db1.Users;
+            return PartialView("_UserGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UserGridViewPartialAddNew(Library.Models.User item)
+        {
+            var model = db1.Users;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_UserGridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UserGridViewPartialUpdate(Library.Models.User item)
+        {
+            var model = db1.Users;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.UserID == item.UserID);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db1.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_UserGridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UserGridViewPartialDelete(System.Int32 UserID)
+        {
+            var model = db1.Users;
+            if (UserID >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.UserID == UserID);
+                    if (item != null)
+                        model.Remove(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_UserGridViewPartial", model.ToList());
         }
     }
 }

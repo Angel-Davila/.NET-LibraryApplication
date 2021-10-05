@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 using Library.DAL;
 using Library.Models;
 using PagedList;
+
 
 namespace Library.Controllers
 {
@@ -22,7 +24,7 @@ namespace Library.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "title_descent" : "";
 
-            if (searchString != null) 
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -79,7 +81,7 @@ namespace Library.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookID,Title,Author,Date,Genre,Price,PageNumber")] Book book)
+        public ActionResult Create([Bind(Include = "BookID, Title, Author, Date, Genre, Price, PageNumber, imgCover")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -155,6 +157,81 @@ namespace Library.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        Library.DAL.LibraryContext db1 = new Library.DAL.LibraryContext();
+
+        [ValidateInput(false)]
+        public ActionResult BookGridViewPartial()
+        {
+            var model = db1.Books;
+            return PartialView("_BookGridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult BookGridViewPartialAddNew(Library.Models.Book item)
+        {
+            var model = db1.Books;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_BookGridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult BookGridViewPartialUpdate(Library.Models.Book item)
+        {
+            var model = db1.Books;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.BookID == item.BookID);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db1.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_BookGridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult BookGridViewPartialDelete(System.Int32 BookID)
+        {
+            var model = db1.Books;
+            if (BookID >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.BookID == BookID);
+                    if (item != null)
+                        model.Remove(item);
+                    db1.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_BookGridViewPartial", model.ToList());
         }
     }
 }
