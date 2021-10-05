@@ -275,5 +275,7 @@ __pycache__/
 
 /Migrations
 /Assets
+/Properties
+
 
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore
