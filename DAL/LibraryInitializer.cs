@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Library.Models;
-using System.Data.Entity;
 
 namespace Library.DAL
 {
@@ -13,36 +10,31 @@ namespace Library.DAL
         {
             var users = new List<User>
             {
-                new User{FirstName = "Jerry",
-                        LastName = "Powell",
+                new User{Name = "Jerry Powell",
                         Email = "scelerisque.lorem@turpisvitae.co.uk",
                         Address = "151-6190 Mattis. Ave",
                         PhoneNumber = "(724) 715-0238",
                         PostalCode = "233971"},
 
-                new User{FirstName = "Marah",
-                        LastName = "Maynard",
+                new User{Name = "Marah Maynard",
                         Email = "magna.suspendisse.tristique@inlobortistellus.edu",
                         Address = "604-2165 Nulla Rd.",
                         PhoneNumber = "(638) 366-2332",
                         PostalCode = "50925"},
 
-                new User{FirstName = "Phelan Poole",
-                        LastName = "Hope Randall",
+                new User{Name = "Phelan Poole",
                         Email = "nisl@vulputatenisi.edu",
                         Address = "P.O. Box 652, 1000 At Rd.",
                         PhoneNumber = "1-245-835-6445",
                         PostalCode = "5818"},
 
-                new User{FirstName = "Stacey",
-                        LastName = "Weiss",
+                new User{Name = "Stacey Weiss",
                         Email = "augue@egestas.edu",
                         Address = "2217 Ac Street",
                         PhoneNumber = "(874) 823-2566",
                         PostalCode = "22351-32972"},
 
-                new User{FirstName = "Mercedes",
-                        LastName = "Daugherty",
+                new User{Name = "Mercedes Daugherty",
                         Email = "ultrices@erosproin.org",
                         Address = "328-3490 Ornare. Rd.",
                         PhoneNumber = "(369) 544-6189",
