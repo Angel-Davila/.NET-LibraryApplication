@@ -14,31 +14,40 @@ namespace Library.DAL
                         Email = "scelerisque.lorem@turpisvitae.co.uk",
                         Address = "151-6190 Mattis. Ave",
                         PhoneNumber = "(724) 715-0238",
-                        PostalCode = "233971"},
-
+                        PostalCode = "233971",
+                        BirthDate = DateTime.Parse("2000-05-30")
+            },
                 new User{Name = "Marah Maynard",
                         Email = "magna.suspendisse.tristique@inlobortistellus.edu",
                         Address = "604-2165 Nulla Rd.",
                         PhoneNumber = "(638) 366-2332",
-                        PostalCode = "50925"},
+                        PostalCode = "50925",
+                        BirthDate = DateTime.Parse("2003-01-04")
+                },
 
                 new User{Name = "Phelan Poole",
                         Email = "nisl@vulputatenisi.edu",
                         Address = "P.O. Box 652, 1000 At Rd.",
                         PhoneNumber = "1-245-835-6445",
-                        PostalCode = "5818"},
+                        PostalCode = "5818",
+                        BirthDate = DateTime.Parse("1970-08-31")
+                },
 
                 new User{Name = "Stacey Weiss",
                         Email = "augue@egestas.edu",
                         Address = "2217 Ac Street",
                         PhoneNumber = "(874) 823-2566",
-                        PostalCode = "22351-32972"},
+                        PostalCode = "22351-32972",
+                        BirthDate = DateTime.Parse("1999-12-25")
+                },
 
                 new User{Name = "Mercedes Daugherty",
                         Email = "ultrices@erosproin.org",
                         Address = "328-3490 Ornare. Rd.",
                         PhoneNumber = "(369) 544-6189",
-                        PostalCode = "70925"}
+                        PostalCode = "70925",
+                        BirthDate = DateTime.Parse("1989-09-10")
+                } 
             };
 
             users.ForEach(s => context.Users.Add(s));
