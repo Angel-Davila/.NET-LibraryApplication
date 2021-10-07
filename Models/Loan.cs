@@ -9,14 +9,15 @@ namespace Library.Models
                 
         public int UserID { get; set; }
 
-
         public int BookID { get; set; }
+
+        public string LoanDescription { get; set; }
 
         [DataType(DataType.DateTime)]
         private DateTime? date;
         
         [Display(Name = "Loan date")]
-        public DateTime LoanDate 
+        public DateTime? LoanDate 
         {   
             get { return date ?? DateTime.Now; } 
             set { date = value; } 
@@ -24,7 +25,7 @@ namespace Library.Models
 
         [Display(Name = "Return date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReturnDate { get; set; }
 
         public virtual User User { get; set; }
