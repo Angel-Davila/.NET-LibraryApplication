@@ -270,6 +270,12 @@
     <Compile Include="Reports\UserReport.Designer.cs">
       <DependentUpon>UserReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\LoanReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LoanReport.Designer.cs">
+      <DependentUpon>LoanReport.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -330,6 +336,7 @@
     <Content Include="Views\Book\_BookGridViewPartial.cshtml" />
     <Content Include="Views\Report\Book.cshtml" />
     <Content Include="Views\Report\User.cshtml" />
+    <Content Include="Views\Report\Loan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -400,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\UserReport.resx">
       <DependentUpon>UserReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LoanReport.resx">
+      <DependentUpon>LoanReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
