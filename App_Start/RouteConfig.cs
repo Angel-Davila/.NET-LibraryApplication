@@ -32,7 +32,7 @@ namespace Library
             );
 
             routes.MapRoute(
-               name: "UserReport",
+               name: "LoanReport",
                url: "{controller}/{action}/{id}",
                defaults: new { controller = "Report", action = "Loan", id = UrlParameter.Optional }
            );
