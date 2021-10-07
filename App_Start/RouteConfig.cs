@@ -20,10 +20,23 @@ namespace Library
             );
 
             routes.MapRoute(
-                name: "Report",
+                name: "BookReport",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Report", action = "Book", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "UserReport",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Report", action = "User", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+               name: "UserReport",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Report", action = "Loan", id = UrlParameter.Optional }
+           );
         }
+
     }
 }
