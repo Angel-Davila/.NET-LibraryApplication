@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "User";
+}
+
+<div class="text-center">
+    <h2>User Report</h2>
+</div>
+
+@Html.DevExpress().WebDocumentViewer(settings =>
+{
+    settings.Name = "WebDocumentViewer";
+}).Bind(new Library.Reports.UserReport()).GetHtml()
+
+<button class="button" style="margin: 22px;" type="button" onclick="location.href='@Url.Action("Index", "User")'">Go back</button>
