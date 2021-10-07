@@ -240,6 +240,14 @@
     <Compile Include="Migrations\202110052235599_returnDate.Designer.cs">
       <DependentUpon>202110052235599_returnDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110062227316_BirthDate.cs" />
+    <Compile Include="Migrations\202110062227316_BirthDate.Designer.cs">
+      <DependentUpon>202110062227316_BirthDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110062249590_BirthDateUser.cs" />
+    <Compile Include="Migrations\202110062249590_BirthDateUser.Designer.cs">
+      <DependentUpon>202110062249590_BirthDateUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Loan.cs" />
@@ -250,11 +258,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="BookPrices.cs">
+    <Compile Include="Reports\BookPrices.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BookPrices.Designer.cs">
+    <Compile Include="Reports\BookPrices.Designer.cs">
       <DependentUpon>BookPrices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\UserReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\UserReport.Designer.cs">
+      <DependentUpon>UserReport.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +329,7 @@
     <Content Include="Views\User\_UserGridViewPartial.cshtml" />
     <Content Include="Views\Book\_BookGridViewPartial.cshtml" />
     <Content Include="Views\Report\Book.cshtml" />
+    <Content Include="Views\Report\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,13 +384,22 @@
     <EmbeddedResource Include="Migrations\202110052235599_returnDate.resx">
       <DependentUpon>202110052235599_returnDate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110062227316_BirthDate.resx">
+      <DependentUpon>202110062227316_BirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110062249590_BirthDateUser.resx">
+      <DependentUpon>202110062249590_BirthDateUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="BookPrices.resx">
+    <EmbeddedResource Include="Reports\BookPrices.resx">
       <DependentUpon>BookPrices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UserReport.resx">
+      <DependentUpon>UserReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
