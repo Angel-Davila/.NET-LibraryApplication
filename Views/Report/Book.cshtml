@@ -5,10 +5,11 @@
 <div class="text-center">
     <h2>Book report</h2>
 </div>
+<hr />
 
 @Html.DevExpress().WebDocumentViewer(settings =>
 {
     settings.Name = "WebDocumentViewer";
-}).Bind(new Library.BookPrices()).GetHtml();
+}).Bind(new Library.BookPrices()).GetHtml()
 
 <button class="button" style="margin: 22px;" type="button" onclick="location.href='@Url.Action("Index", "Book")'">Go back</button>
