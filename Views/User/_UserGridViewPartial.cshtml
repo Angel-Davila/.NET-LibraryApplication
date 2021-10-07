@@ -43,6 +43,25 @@
         settings.Columns.Add("Address");
         settings.Columns.Add("PhoneNumber");
         settings.Columns.Add("PostalCode");
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "BirthDate";
+            column.Caption = "Birth Date";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.PropertiesEdit.DisplayFormatString = "yyyy-MM-dd";
+            column.EditorProperties().DateEdit(p =>
+
+            {
+                p.AllowUserInput = true;
+                p.TimeSectionProperties.Visible = true;
+                //p.TimeSectionProperties.Adaptive = true;
+                p.EditFormatString = "yyyy-MM-dd";
+                p.DisplayFormatString = "yyyy-MM-dd";
+                p.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+            });
+        });
+
     });
     if (ViewData["EditError"] != null)
     {
