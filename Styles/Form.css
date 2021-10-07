@@ -258,3 +258,16 @@ body > p, b, a, h3, h4, h5,  dt, dd, dl, p > a{
 dxgvIndentCell, .dxgv {
     background-color: #333 !important;
 }
+
+.dxgvTable_Office365 {
+    border-right: white 1px solid;
+    border-top: white 1px solid;
+    border-left: white 1px solid;
+    border-bottom: white 1px solid;
+    border: 1px solid white;
+}
+
+.dxgvTable_Office365 > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+
+        border-top: 1px solid white !important;
+    }
