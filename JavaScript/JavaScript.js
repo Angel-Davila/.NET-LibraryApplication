@@ -1,14 +1,4 @@
-﻿
-
-
-const CardBadge = (props) => {
-    return (
-      
-        )
-}
-
-
-function Catalogue() {
+﻿function Catalogue() {
 
     const [products, setProducts] = useState([])
     const [token, removeToken] = useCookies(['mytoken'])
