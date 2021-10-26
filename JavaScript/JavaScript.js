@@ -10,7 +10,7 @@
             'method': 'GET',
             headers: {
                 "Content-Type": "application/json",
-            }
+            } 
         })
             .then(response => response.json())
             .then(response => setProducts(response))
@@ -53,7 +53,7 @@ class UserSession {
             })
             let response = await request.json()
             try {
-                let key = `token-${reponse.n}`
+                let key = `token-${response.n}`
             }
 
             })
